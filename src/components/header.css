@@ -1,0 +1,18 @@
+.navbar {
+    background-color: red;
+}
+
+.navbar-brand button{
+    border-radius: 6px;
+    background-color: #1E2834;
+    color: #fff;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    margin-left: 5px;
+}
+
+.navbar-brand button:hover {
+    background-color: #fff;
+    color: #1E2834;
+}
+

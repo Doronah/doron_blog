@@ -2,6 +2,7 @@ import {PostLIst} from "../components/post-list";
 import {useContext, useState} from "react";
 import {BlogContext} from "../providers/blog-provider";
 import {PostCard} from "../components/post-card";
+import "./posts.css"
 
 
 export function Posts() {
@@ -20,19 +21,16 @@ export function Posts() {
   // }
 
   return (
-      <div>
-        <h2>Posts: {posts.length}</h2>
-        <p>Here is the list of my posts!</p>
-        <input onChange={handleUserInput} className='form-control-lg'/>
-        {/* <pre>{query}</pre> */}
+      <div className="posts-container">
+        < h2 className="posts-title">Posts: {posts.length}</h2>
+        <p className="posts-subtitle">Here is the list of my posts!</p>
+        <input className="input-search form-control-lg" onChange={handleUserInput} placeholder="Search post..."/>
         <PostLIst>
-          {/* Example of putting filter and map logic inside JSX */}
           { posts
               .filter(post => post.title.toLowerCase().includes(query.toLowerCase()))
               .map((post) => <PostCard key={post.id} singlePost={post}/>)
           }
         </PostLIst>
-        <button>load more</button>
       </div>
   )
 }

@@ -1,5 +1,6 @@
-import {Header} from "./components/hedaer";
+import {Header} from "./components/header";
 import {Outlet} from "react-router-dom";
+import "./App.css"
 
 export function App() {
   return (

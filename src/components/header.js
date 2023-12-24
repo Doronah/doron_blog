@@ -1,0 +1,50 @@
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../providers/auth-provider";
+import "./header.css";
+
+export function Header() {
+  const { user, signIn, signOut } = useContext(AuthContext);
+
+  return (
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container">
+        <Link className="navbar-brand" to="/">
+          Doron Ahalota | Blog
+        </Link>
+        <a className="navbar-brand" href="#">
+          {user ? (
+            `Hello: ${user.userName}`
+          ) : (
+            <button onClick={signIn}>sign In</button>
+          )}
+          {user && <button onClick={signOut}>sign Out</button>}
+        </a>
+        <ul className="nav">
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/posts">
+              Posts
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/contact">
+              Contact
+            </Link>
+          </li>
+          {user && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/admin">
+                Admin
+              </Link>
+            </li>
+          )}
+        </ul>
+      </div>
+    </nav>
+  );
+}

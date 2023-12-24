@@ -3,26 +3,31 @@ import { Link } from "react-router-dom";
 import { BlogContext } from "../providers/blog-provider";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
-import {useForm} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 export function PostCard({ singlePost }) {
-  const { deletePost, toggleEditMode,handleSaveEdit } = useContext(BlogContext);
-  const { register,getValues, handleSubmit, formState } = useForm();
+  const { deletePost, toggleEditMode, handleSaveEdit, handleNoEdit } =
+    useContext(BlogContext);
+  const { register, getValues, handleSubmit, formState } = useForm();
 
   const handleNewPostSubmit = (data) => {
     handleSaveEdit({
-        id: singlePost.id,
-       title: data.title,
-       body: data.content,
-       isEditMode: false,
-     })
-  }
+      id: singlePost.id,
+      title: data.title,
+      body: data.content,
+      date: data.date,
+      isEditMode: false,
+    });
+  };
 
   return (
-    <div className="card">
+    <div className="post-container">
       {singlePost.isEditMode ? (
-        <form className="form" onSubmit={handleSubmit(handleNewPostSubmit)}>
-          <div>
+        <form
+          className="form-container"
+          onSubmit={handleSubmit(handleNewPostSubmit)}
+        >
+          <div className="input-wrapper">
             <label htmlFor="title">Title</label>
             <input type="text" {...register("title", { required: true })} />
             {formState.errors.title && (
@@ -32,7 +37,7 @@ export function PostCard({ singlePost }) {
             )}
           </div>
 
-          <div>
+          <div className="input-wrapper">
             <label htmlFor="content">Content</label>
             <textarea
               {...register("content", {
@@ -48,39 +53,47 @@ export function PostCard({ singlePost }) {
             )}
           </div>
 
-          <div>
+          <div className="input-wrapper">
             <label>Date</label>
-            <input type="date" {...register("createdAt")} />
+            <input type="date" {...register("date", { required: true })} />
           </div>
 
-          <div>
+          <div className="input-wrapper">
             <label htmlFor="accept terms">accept</label>
             <input type="checkbox" {...register("isTermsAccepted")} />
           </div>
 
           <button type="submit">Save</button>
+          <button type="click" onClick={handleNoEdit}>
+            cancel
+          </button>
         </form>
       ) : (
-        <div className="card-wrapper">
+        <div className="card-wr">
           <div className="card-header">{singlePost.title}</div>
           <div className="card-body">{singlePost.body}</div>
-          <Link to={`/posts/${singlePost.id}`} className="btn btn-primary">
-            Read more
-          </Link>
-          <MdDeleteForever
-            className="btn-delete"
-            onClick={() => deletePost(singlePost.id)}
-            style={{ fontSize: "28px" }}
-          >
-            Delete
-          </MdDeleteForever>
-          <FaRegEdit
-            className="btn-edit"
-            style={{ fontSize: "28px" }}
-            onClick={() => toggleEditMode(singlePost.id)}
-          >
-            Edit
-          </FaRegEdit>
+          <div className="card-date">{singlePost.date}</div>
+          <div className="bottom-area">
+            <Link to={`/posts/${singlePost.id}`} className="btn btn-primary">
+              Read more
+            </Link>
+            <div className="icons-wrapper">
+              <MdDeleteForever
+                className="btn-delete"
+                onClick={() => deletePost(singlePost.id)}
+                style={{ fontSize: "28px" }}
+              >
+                Delete
+              </MdDeleteForever>
+              <FaRegEdit
+                className="btn-edit"
+                style={{ fontSize: "28px" }}
+                onClick={() => toggleEditMode(singlePost.id)}
+              >
+                Edit
+              </FaRegEdit>
+            </div>
+          </div>
         </div>
       )}
     </div>

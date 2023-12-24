@@ -1,20 +1,12 @@
 import {createContext, useEffect, useState} from "react";
 
-// Create special context Object
 export const BlogContext = createContext(null);
 
 export function BlogProvider({children}) {
   const [posts, setPosts] = useState([]);
 
-  // useEffect(() => {
-  //   fetch('https://jsonplaceholder.typicode.com/posts')
-  //       .then(response => response.json())
-  //       .then(json => setPosts(json))
-  // }, []);
-
   const addPost = (post) => {
     setPosts([...posts, post]);
-    // console.log(post);
   }
 
   const deletePost = (id) => {
@@ -32,7 +24,12 @@ export function BlogProvider({children}) {
     setPosts(newPosts)
   }
 
-  const value = { posts, addPost, deletePost, toggleEditMode, handleSaveEdit };
+  const handleNoEdit = ()=>{
+    const newPosts = [...posts].map((post)=>({...post ,isEditMode:false}));
+    setPosts(newPosts)
+  }
+
+  const value = { posts, addPost, deletePost, toggleEditMode, handleSaveEdit, handleNoEdit };
 
   return (
       <BlogContext.Provider value={value}>
