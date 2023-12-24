@@ -21,7 +21,8 @@ export function PostCard({ singlePost }) {
   };
 
   return (
-    <div className="post-container">
+    <div className="post-container"> 
+    {/* edit mode */}
       {singlePost.isEditMode ? (
         <form
           className="form-container"

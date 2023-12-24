@@ -8,10 +8,9 @@ export function Admin() {
 
   const {addPost} = useContext(BlogContext);
   const {user} = useContext(AuthContext);
-  const {previewImage, setPreviewImage} = useState(null);
 
   const { register, handleSubmit, formState } = useForm();
-
+// check connection 
   if(!user) {
     return <p>You must sign in first!</p>
   }
@@ -36,6 +35,7 @@ export function Admin() {
             {formState.errors.title && <span className="text-danger">cant send a post without title!!!! please enter a title</span>}
           </div>
 
+          {/* only english letters and at least 5 letters */}
           <div className="input-wrapper">
             <label htmlFor="content">Content</label>
             <textarea {...register('content', {minLength: 5, pattern:/^[a-zA-Z\s\p{P}]+$/u})}></textarea>

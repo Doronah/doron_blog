@@ -24,6 +24,7 @@ export function BlogProvider({children}) {
     setPosts(newPosts)
   }
 
+  // Exit editing mode
   const handleNoEdit = ()=>{
     const newPosts = [...posts].map((post)=>({...post ,isEditMode:false}));
     setPosts(newPosts)

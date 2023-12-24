@@ -8,7 +8,7 @@ export function Home() {
             <h1 className="sen">Welcome to My Blog!</h1>
             <img src={catImg} alt=""/>
             <p className=" text-body">
-              Happy to see ypu here! I'm Doron. i am a student and love lerning rograming 
+              Happy to see ypu here! I'm Doron. i am a student and I like to learn programming 
             </p>
             <p>
               <Link to="/posts" className="btn btn-primary">Go to posts</Link>

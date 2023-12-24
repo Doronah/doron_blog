@@ -19,6 +19,7 @@ export function Posts() {
         < h2 className="posts-title">Posts: {posts.length}</h2>
         <p className="posts-subtitle">Here is the list of my posts!</p>
         <input className="input-search form-control-lg" onChange={handleUserInput} placeholder="Search post..."/>
+        {/* filter  */}
         <PostLIst>
           { posts
               .filter(post => post.title.toLowerCase().includes(query.toLowerCase()))

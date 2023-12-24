@@ -6,7 +6,6 @@ import {PostPage} from "./pages/post";
 import {ContactPage} from "./pages/contact";
 import React from "react";
 import {Admin} from "./pages/admin";
-import { About } from "./pages/about";
 
 export const router = createBrowserRouter([
   {
