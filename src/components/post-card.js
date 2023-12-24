@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 export function PostCard({ singlePost }) {
   const { deletePost, toggleEditMode, handleSaveEdit, handleNoEdit } =
     useContext(BlogContext);
-  const { register, getValues, handleSubmit, formState } = useForm();
+  const { register,  handleSubmit, formState } = useForm();
 
   const handleNewPostSubmit = (data) => {
     handleSaveEdit({
@@ -42,7 +42,7 @@ export function PostCard({ singlePost }) {
             <textarea
               {...register("content", {
                 minLength: 5,
-                pattern: /^[a-zA-Z\s]+$/,
+                pattern: /^[a-zA-Z\s\p{P}]+$/u,
               })}
             ></textarea>
             {formState.errors.content && (
@@ -54,13 +54,14 @@ export function PostCard({ singlePost }) {
           </div>
 
           <div className="input-wrapper">
-            <label>Date</label>
+            <label htmlFor="date">Date</label>
             <input type="date" {...register("date", { required: true })} />
+            {formState.errors.date && <span className="text-danger">fill date please</span>}
           </div>
 
           <div className="input-wrapper">
             <label htmlFor="accept terms">accept</label>
-            <input type="checkbox" {...register("isTermsAccepted")} />
+            <input type="checkbox" {...register ('accept terms',{required:true})} />
           </div>
 
           <button type="submit">Save</button>

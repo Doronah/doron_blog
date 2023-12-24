@@ -14,12 +14,6 @@ export function Posts() {
   }
 
 
-  // TODO: example of putting the filter inside the component body
-  // const filteredPosts = () => {
-  //   const lowerQuery = query.toLowerCase();
-  //   return posts.filter(post => post.title.toLowerCase().includes(lowerQuery));
-  // }
-
   return (
       <div className="posts-container">
         < h2 className="posts-title">Posts: {posts.length}</h2>

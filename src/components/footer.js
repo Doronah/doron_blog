@@ -1,3 +1,7 @@
 export function Footer() {
-    return <h1>Footer</h1>;
-  }
+  return (
+    <footer style={{ marginTop: '2rem', padding: '1rem', backgroundColor: '#f0f0f0', textAlign: 'center' }}>
+      <p>&copy; 2023 Your Company. All rights reserved.</p>
+    </footer>
+  );
+}

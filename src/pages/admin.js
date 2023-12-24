@@ -10,7 +10,7 @@ export function Admin() {
   const {user} = useContext(AuthContext);
   const {previewImage, setPreviewImage} = useState(null);
 
-  const { register,getValues, handleSubmit, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm();
 
   if(!user) {
     return <p>You must sign in first!</p>
@@ -38,19 +38,20 @@ export function Admin() {
 
           <div className="input-wrapper">
             <label htmlFor="content">Content</label>
-            <textarea {...register('content', {minLength: 5, pattern:/^[a-zA-Z\s]+$/,})}></textarea>
+            <textarea {...register('content', {minLength: 5, pattern:/^[a-zA-Z\s\p{P}]+$/u})}></textarea>
             {formState.errors.content && <span className="text-danger">content should be more then 5 chars and include only english letters</span>}
           </div>
 
           <div className="input-wrapper">
             <label htmlFor="date">Date</label>
             <input type="date"  {...register('date', {required:true})}/>
+            {formState.errors.date && <span className="text-danger">fill date please</span>}
           </div>
 
 
           <div className="input-wrapper input-checkbox">
             <label htmlFor="accept terms">accept</label>
-            <input type="checkbox" {...register('isTermsAccepted')}/>
+            <input type="checkbox" {...register ('accept terms',{required:true})}/>
           </div>
 
 
